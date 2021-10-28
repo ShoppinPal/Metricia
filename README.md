@@ -35,19 +35,19 @@
 - increment: increment gauge value
 
 ```
-  metricsSdk.counter.inc(<counter_name>, <map_of_labels> , <increment_value>, <description_of_metrics: optional>);
+  metricsSdk.gauge.inc(<counter_name>, <map_of_labels> , <increment_value>, <description_of_metrics: optional>);
 ```
 
 - decrement: decrement gauge value
 
 ```
-  metricsSdk.counter.dec(<counter_name>, <map_of_labels> , <decrement_value>, <description_of_metrics: optional>);
+  metricsSdk.gauge.dec(<counter_name>, <map_of_labels> , <decrement_value>, <description_of_metrics: optional>);
 ```
 
 - set value : set gauge value
 
 ```
-  metricsSdk.counter.dec(<counter_name>, <map_of_labels> , <value>, <description_of_metrics: optional>);
+  metricsSdk.gauge.dec(<counter_name>, <map_of_labels> , <value>, <description_of_metrics: optional>);
 ```
 
 - createWithCallback: get values when the metrics are scrapped

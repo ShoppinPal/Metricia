@@ -58,7 +58,7 @@ module.exports = {
     },
     set: (name, labels = {}, value, description, addProjectNamePrefix = true) => {
       const metricName = getMetricName(name, addProjectNamePrefix);
-      promNodeWrapper.decrementGauge(metricName, value, labels, description);
+      promNodeWrapper.setGauge(metricName, value, labels, description);
     },
   },
   histogram: {

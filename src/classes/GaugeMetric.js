@@ -27,7 +27,7 @@ class GaugeMetric {
   }
 
   decrement(value = 1) {
-    metricsSdk.gauge.set(this.name, this.labels, value || this.value, this.description);
+    metricsSdk.gauge.dec(this.name, this.labels, value || this.value, this.description);
   }
 
   logMetric(value) {
