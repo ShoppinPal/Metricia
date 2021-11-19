@@ -8,6 +8,9 @@ const gauges = {};
 const histograms = {};
 
 function startCollection(serviceName) {
+  if(!/^[a-z0-9]*$/.test(serviceName)) {
+    throw new Error('Metricia Invalid Parameter in startCollection: service name should only contain small alphabets');
+  }
   collectDefaultMetrics({ register, prefix: `${serviceName}_` });
 }
 
