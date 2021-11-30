@@ -84,7 +84,7 @@ function getOrCreate(name, labels, description, buckets) {
 let metricsMiddlewareInstance;
 
 function apiMiddleware(projectPrefix, processNamePrefix) {
-  if (!metricsInstance) {
+  if (!metricsMiddlewareInstance) {
     metricsMiddlewareInstance = apiMetrics({
       metricsPrefix: projectPrefix + '_' + processNamePrefix,
       defaultMetricsInterval: 60 * 1000,
