@@ -1,8 +1,10 @@
 const moment = require('moment');
 const promNodeWrapper = require('./prom-node');
 const runServer = require('./server');
+const apiMetrics = require('prometheus-api-metrics');
 
-let projectPrefix = '';
+let projectPrefix = '',
+  processNamePrefix = '';
 function getMetricName(name, addProjectNamePrefix) {
   if (addProjectNamePrefix && projectPrefix) {
     return `${projectPrefix}_${name}`;
@@ -24,10 +26,18 @@ module.exports = {
   // Can at the entry pount of project to start metrics server
   startCollectingMetrics: (projectName, processName, collectSystemMetrics = false) => {
     projectPrefix = projectName;
+    processNamePrefix = processName;
     if (collectSystemMetrics) {
       promNodeWrapper.startCollection(`${projectName}_${processName}`);
     }
     return runServer();
+  },
+  apiRequestMiddleware: (req, res, next) => {
+    apiMetrics({
+      metricsPrefix: projectPrefix + '_' + processNamePrefix,
+      defaultMetricsInterval: 60 * 1000,
+      useUniqueHistogramName: false,
+    })(req, res, next);
   },
   counter: {
     create: (name, labels = {}, description, addProjectNamePrefix = true) => {
