@@ -79,6 +79,19 @@ function getOrCreate(name, labels, description, buckets) {
   return histograms[name];
 }
 
+const metricsMiddlewareInstance;
+
+function apiMiddleware(projectPrefix, processNamePrefix) {
+  if(!metricsInstance) {
+    metricsMiddlewareInstance = apiMetrics({
+      metricsPrefix: projectPrefix + '_' + processNamePrefix,
+      defaultMetricsInterval: 60 * 1000,
+      useUniqueHistogramName: false,
+    })
+  }
+  return metricsMiddlewareInstance;
+}
+
 module.exports = {
   register,
   startCollection,
@@ -89,4 +102,5 @@ module.exports = {
   decrementGauge,
   setGauge,
   getOrCreate,
+  apiMiddleware,
 };

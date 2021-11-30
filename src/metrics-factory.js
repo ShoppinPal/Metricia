@@ -33,11 +33,7 @@ module.exports = {
     return runServer();
   },
   apiRequestMiddleware: (req, res, next) => {
-    apiMetrics({
-      metricsPrefix: projectPrefix + '_' + processNamePrefix,
-      defaultMetricsInterval: 60 * 1000,
-      useUniqueHistogramName: false,
-    })(req, res, next);
+    promNodeWrapper.apiMiddleware(req, res, next);
   },
   counter: {
     create: (name, labels = {}, description, addProjectNamePrefix = true) => {
