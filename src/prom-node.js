@@ -8,8 +8,10 @@ const gauges = {};
 const histograms = {};
 
 function startCollection(serviceName) {
-  if(!/^[a-z0-9]*$/.test(serviceName)) {
-    throw new Error('Metricia Invalid Parameter in startCollection: service name should only contain small alphabets');
+  if (!/^[a-z0-9]*$/.test(serviceName)) {
+    throw new Error(
+      'Metricia Invalid Parameter in startCollection: service name should only contain small alphabets',
+    );
   }
   collectDefaultMetrics({ register, prefix: `${serviceName}_` });
 }
@@ -79,15 +81,15 @@ function getOrCreate(name, labels, description, buckets) {
   return histograms[name];
 }
 
-const metricsMiddlewareInstance;
+let metricsMiddlewareInstance;
 
 function apiMiddleware(projectPrefix, processNamePrefix) {
-  if(!metricsInstance) {
+  if (!metricsInstance) {
     metricsMiddlewareInstance = apiMetrics({
       metricsPrefix: projectPrefix + '_' + processNamePrefix,
       defaultMetricsInterval: 60 * 1000,
       useUniqueHistogramName: false,
-    })
+    });
   }
   return metricsMiddlewareInstance;
 }
