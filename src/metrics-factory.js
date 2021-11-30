@@ -32,7 +32,7 @@ module.exports = {
     return runServer();
   },
   apiRequestMiddleware: (req, res, next) => {
-    promNodeWrapper.apiMiddleware(req, res, next);
+    promNodeWrapper.apiMiddleware(projectPrefix, processNamePrefix)(req, res, next);
   },
   counter: {
     create: (name, labels = {}, description, addProjectNamePrefix = true) => {
