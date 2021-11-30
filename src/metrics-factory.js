@@ -1,7 +1,6 @@
 const moment = require('moment');
 const promNodeWrapper = require('./prom-node');
 const runServer = require('./server');
-const apiMetrics = require('prometheus-api-metrics');
 
 let projectPrefix = '',
   processNamePrefix = '';
