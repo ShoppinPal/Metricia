@@ -54,9 +54,15 @@ module.exports = {
     },
   },
   gauge: {
-    createWithCallback: (name, labelNames, description, callback, addProjectNamePrefix = true) => {
+    createWithCallback: (
+      name,
+      labelNames = [],
+      description,
+      callback,
+      addProjectNamePrefix = true,
+    ) => {
       const metricName = getMetricName(name, addProjectNamePrefix);
-      labels = Object.assign({}, configDefaultLabels, labels);
+      labelNames = labelNames.concat(configDefaultLabels);
       promNodeWrapper.createGauge(metricName, labelNames, description, callback);
     },
     create: (name, labels = {}, description, addProjectNamePrefix = true) => {
@@ -84,7 +90,7 @@ module.exports = {
     getTimeDiff,
     getOrCreate: (name, labels, description, buckets, addProjectNamePrefix = true) => {
       const metricName = getMetricName(name, addProjectNamePrefix);
-      labels = Object.assign({}, configDefaultLabels, labels);
+      labels = labels.concat(Object.keys(configDefaultLabels));
       return promNodeWrapper.getOrCreate(metricName, labels, description, buckets);
     },
   },
