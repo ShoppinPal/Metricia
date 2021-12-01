@@ -87,7 +87,7 @@ function apiMiddleware(projectPrefix, processNamePrefix) {
   if (!metricsMiddlewareInstance) {
     const apiMetrics = require('prometheus-api-metrics');
     metricsMiddlewareInstance = apiMetrics({
-      metricsPrefix: projectPrefix + '_' + processNamePrefix,
+      metricsPrefix: processNamePrefix,
       defaultMetricsInterval: 60 * 1000,
       useUniqueHistogramName: false,
     });
