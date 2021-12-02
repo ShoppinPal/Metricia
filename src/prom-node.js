@@ -83,12 +83,15 @@ function getOrCreate(name, labels, description, buckets) {
 
 let metricsMiddlewareInstance;
 
-function apiMiddleware(projectPrefix, processNamePrefix) {
+function apiMiddleware(projectPrefix, processNamePrefix, extraLabels) {
   if (!metricsMiddlewareInstance) {
     const apiMetrics = require('prometheus-api-metrics');
+    extraLabels.processName = processNamePrefix;
     metricsMiddlewareInstance = apiMetrics({
-      metricsPrefix: processNamePrefix,
-      defaultMetricsInterval: 60 * 1000,
+      extractAdditionalLabelValuesFn: () => extraLabels,
+      additionalLabels: Object.keys(extraLabels),
+      metricsPrefix: projectPrefix,
+      defaultMetricsInterval: 30 * 1000,
       useUniqueHistogramName: false,
     });
   }

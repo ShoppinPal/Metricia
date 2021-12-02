@@ -23,6 +23,12 @@ function getTimeDiff(startDate, endDate) {
 }
 
 module.exports = {
+  getMetricPrefix: () => {
+    return `${projectPrefix}_${processNamePrefix}`;
+  },
+  getExtraLabels: () => {
+    return configDefaultLabels;
+  },
   // Can at the entry pount of project to start metrics server
   startCollectingMetrics: (
     projectName,
@@ -39,7 +45,7 @@ module.exports = {
     return runServer();
   },
   apiRequestMiddleware: (req, res, next) => {
-    promNodeWrapper.apiMiddleware(projectPrefix, processNamePrefix)(req, res, next);
+    promNodeWrapper.apiMiddleware(projectPrefix, processNamePrefix, defaultLabels)(req, res, next);
   },
   counter: {
     create: (name, labels = {}, description, addProjectNamePrefix = true) => {
