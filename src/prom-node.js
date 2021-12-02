@@ -86,13 +86,13 @@ let metricsMiddlewareInstance;
 function apiMiddleware(projectPrefix, processNamePrefix, extraLabels) {
   if (!metricsMiddlewareInstance) {
     const apiMetrics = require('prometheus-api-metrics');
-    extraLabels.processName = processNamePrefix;
     metricsMiddlewareInstance = apiMetrics({
       extractAdditionalLabelValuesFn: () => extraLabels,
       additionalLabels: Object.keys(extraLabels),
       metricsPrefix: projectPrefix,
       defaultMetricsInterval: 0,
       useUniqueHistogramName: false,
+      excludeRoutes: ['/health/heartbeat'],
     });
   }
   return metricsMiddlewareInstance;

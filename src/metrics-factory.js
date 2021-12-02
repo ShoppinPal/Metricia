@@ -24,7 +24,7 @@ function getTimeDiff(startDate, endDate) {
 
 module.exports = {
   getMetricPrefix: () => {
-    return `${projectPrefix}_${processNamePrefix}`;
+    return `${projectPrefix}`;
   },
   getExtraLabels: () => {
     return configDefaultLabels;
@@ -39,7 +39,7 @@ module.exports = {
     projectPrefix = projectName;
     processNamePrefix = processName;
     configDefaultLabels = defaultLabels;
-    configDefaultLabels.processName = processName;
+    configDefaultLabels.process_name = processName;
     if (collectSystemMetrics) {
       promNodeWrapper.startCollection(`${projectName}_${processName}`);
     }
