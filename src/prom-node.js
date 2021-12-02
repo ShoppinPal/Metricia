@@ -91,7 +91,7 @@ function apiMiddleware(projectPrefix, processNamePrefix, extraLabels) {
       extractAdditionalLabelValuesFn: () => extraLabels,
       additionalLabels: Object.keys(extraLabels),
       metricsPrefix: projectPrefix,
-      defaultMetricsInterval: 30 * 1000,
+      defaultMetricsInterval: 0,
       useUniqueHistogramName: false,
     });
   }

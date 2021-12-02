@@ -39,13 +39,18 @@ module.exports = {
     projectPrefix = projectName;
     processNamePrefix = processName;
     configDefaultLabels = defaultLabels;
+    configDefaultLabels.processName = processName;
     if (collectSystemMetrics) {
       promNodeWrapper.startCollection(`${projectName}_${processName}`);
     }
     return runServer();
   },
   apiRequestMiddleware: (req, res, next) => {
-    promNodeWrapper.apiMiddleware(projectPrefix, processNamePrefix, defaultLabels)(req, res, next);
+    promNodeWrapper.apiMiddleware(projectPrefix, processNamePrefix, configDefaultLabels)(
+      req,
+      res,
+      next,
+    );
   },
   counter: {
     create: (name, labels = {}, description, addProjectNamePrefix = true) => {
