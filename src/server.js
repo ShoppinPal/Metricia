@@ -1,5 +1,5 @@
 const express = require('express');
-const logger = require('winston-logstash-transporter')(__filename);
+const logger = require('node-utils/logger')(__filename);
 const promNodeWrapper = require('./prom-node');
 const { HeartBeatResponse } = require('./heartbeat-response');
 
