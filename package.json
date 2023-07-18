@@ -11,7 +11,7 @@
   "license": "ISC",
   "dependencies": {
     "express": "^4.17.1",
-    "moment": "^2.29.1",
+    "moment": "^2.29.4",
     "node-utils": "git+ssh://git@gitlab.shoppinpal.com/node-js/node-utils.git",
     "prom-client": "^13.1.0",
     "winston-logstash-transporter": "^1.1.1",
